@@ -1,0 +1,171 @@
+---
+title: "hw6"
+author: "Siwei Tang"
+output:
+  html_document:
+    df_print: paged
+---
+```{r import library}
+library(ggplot2)
+library(quadprog)
+source("startup.R")
+library(dplyr)
+```
+# Q1:
+## (a)
+Problem 1 Write an R program to find the efficient frontier, the tangency
+portfolio, and the minimum variance portfolio, and plot on “reward-risk
+space” the location of each of the six stocks, the efficient frontier, the tangency
+portfolio, and the line of efficient portfolios. Use the constraints that
+−0.1 ≤ wj ≤ 0.5 for each stock. The first constraint limits short sales but
+does not rule them out completely. The second constraint prohibits more than
+50% of the investment in any single stock. Assume that the annual risk-free
+rate is 3% and convert this to a daily rate by dividing by 365, since interest
+is earned on trading as well as nontrading days.
+```{r EDA }
+dat = read.csv('Stock_Bond.csv', header = T)
+prices = cbind(dat$GM_AC, dat$F_AC, dat$CAT_AC, dat$UTX_AC, dat$MRK_AC, dat$IBM_AC)
+n = dim(prices)[1]
+returns = 100* (prices[2:n,]/prices[1:(n-1),] - 1)
+pairs(returns, labels = c('GM','F','CAT','UTX','MRK','IBM'))
+mean_vec = colMeans(returns)
+cov_mat = cov(returns)
+sd_vect = sqrt(diag(cov_mat))
+```
+```{r Quadratic Programming}
+rf_daily = 3 / 365
+Amat = matrix(cbind(rep(1,6), mean_vec, diag(6), -1 * diag(6)),6,14)
+muP = seq(0.04, 0.08, length = 400)
+# for the expect portforlio return
+sdP = muP # set ip storage for std dev's pf portfolio returns
+weights = matrix(0, nrow = 400, ncol = 6) # storage for weights
+# find the optimal portforlios
+for (i in 1:length(muP)){
+  bvec = c(1, muP[i], rep(-0.1, 6), rep(-0.5, 6))
+  result = solve.QP(Dmat = 2*cov_mat,
+                    dvec = rep(0,6),
+                    Amat = Amat,
+                    bvec = bvec,
+                    meq = 2)
+  sdP[i] = sqrt(result$value)
+  weights[i,] = result$solution
+}
+```
+```{r plotting QP result}
+# pdf("quad_orig_plot.pdf", width = 6, height = 5)
+plot(sdP, muP, type = "l", xlim = c(0,2.5),
+     ylim = c(0, 0.15), lty =3) # plot efficient frontier (and inefficient frontier below the min var portfortlio)
+points(0, rf_daily, cex = 4, pch = "*") # show risk-free asset
+sharpe = (muP - rf_daily) / sdP # input value of risk-free interest asset
+ind = (sharpe == max(sharpe))
+cat("Sharpe ratio is: ", round(max(sharpe),3))
+for (i in 1:6){
+  cat("The weights of tangency portfolio of asset", i, ' is: ', weights[ind,i] * 100,'%\n')
+}
+lines(c(0,2), rf_daily + c(0,2) * (muP[ind] - rf_daily)/sdP[ind], lwd = 4, lty =1, col = "blue") # lines of optimal
+                                      # portfolio
+points(sdP[ind], muP[ind], cex = 3, pch = 1, col = "orange")
+ind2 = (sdP == min(sdP)) # find minimum variance portforlio
+points(sdP[ind2], muP[ind2], cex = 2, pch = 24, col = "grey") # min var points
+ind3 = (muP > muP[ind2])
+# plot efficient frontier
+lines(sdP[ind3], muP[ind3], type = "l", xlim = c(0, 0.25), ylim = c(0, 0.3), lwd = 3, col ='red')
+text(sd_vect[1], mean_vec[1], "GM", cex = 1)
+text(sd_vect[2], mean_vec[2], "F", cex = 1)
+text(sd_vect[3], mean_vec[3], "CAT", cex = 1)
+text(sd_vect[4], mean_vec[4], "UTX", cex = 1)
+text(sd_vect[5], mean_vec[5], "MRK", cex = 1)
+text(sd_vect[6], mean_vec[6], "IBM", cex = 1)
+
+```
+## (b)
+Problem 2 If an investor wants an efficient portfolio with an expected daily
+return of 0.07 %, how should the investor allocate his or her capital to the six
+stocks and to the risk-free asset? Assume that the investor wishes to use the
+tangency portfolio computed with the constraints −0.1 ≤ wj ≤ 0.5, not the
+unconstrained tangency portfolio.
+
+$w = \frac{\mu_t - \mu_f}{\mu_R-\mu_f} $
+```{r b}
+# mean return of mixed risky assets
+mu_R = weights[ind,] %*% mean_vec
+mu_t = 0.07
+w = (mu_t - rf_daily) / (mu_R - rf_daily)
+cat("Weight to risky assets is:",w,"\nWeight to risk-free asset is: ",1-w)
+new_weights = weights[ind,] * as.vector(w)
+cat("\n \n")
+for (i in 1:6){
+  cat("The weights of risky asset", i, ' is: ', new_weights[i] * 100,'%\n')
+}
+cat("\nWeight to risk-free asset is: ",(1-w)*100,"%")
+```
+## (c):
+This is a quadratic programming problem
+Objective function: $min(-d^T b + 1/2 b^T D b)$
+Subject to (bold ones are vectors)
+- **1^T w** = 1
+- **\mu_{return}  w** = \mu_{target}
+- **w \geq -0.1**
+- **-w \geq -0.5**
+## (d):
+```{r d}
+ideal_weights = weights[ind,]
+R_m = ideal_weights %*% t(returns) #  vector of R_m
+mu_m =mean(R_m)
+var_m = var(matrix(R_m))
+cov_m = cov(matrix(R_m), returns)
+beta = cov_m / var_m[1]
+print(beta)
+test = (mean_vec - rf_daily)/(mu_m - rf_daily)
+print(test)
+print("From the result, we can see that beta is very close to the SML line.")
+```
+# Q2
+```{r 6a,b,c}
+cov_m = 0.0165
+mu_f = 0.04
+mu_m = 0.12
+std_m = 0.11
+beta = cov_m / (std_m ** 2)
+cat("beta of Stock A: ", beta)
+mu_R = beta * (mu_m - mu_f) + mu_f
+cat("\n")
+cat("expected return on Stock A: ", mu_R, '\n')
+mkt_risk = (beta ** 2) * (std_m ** 2)
+cat("market risk is: ", mkt_risk)
+cat("precentage of market risk is: ", mkt_risk/0.025) 
+```
+```{r 11a}
+beta = 0.8* 0.3 + 0.9*0.3 + 0.7* 0.4
+cat('new beta = ',beta,'\n')
+var_m = 0.02
+sa = 0.012
+sb = 0.025
+sc = 0.015
+var_er = (beta ** 2) * var_m + (0.3 ** 2) * sa + (0.3 ** 2) * sb + (0.4 ** 2) * sc
+cat('Variance of excess return is: ' ,var_er,'\n')
+mkt_risk2 = (0.8) ^ 2 * var_er
+non_mkt_risk = sa
+prop = sqrt(mkt_risk2 / (mkt_risk2 + non_mkt_risk))
+cat('Proportion of market risk is: ',prop * 100, '% \n')
+```
+# Q3
+## (a)
+$$E(X_n) = E(U \delta_n + \epsilon_n) = E(U) E(\delta_n) + E(\epsilon_n) = \frac{1}{2} + 0 = \frac{1}{2}$$
+$$\sum(X_m,X_n) = cov(U\delta_n + \epsilon_n,U\delta_m + \epsilon_m)$$
+By covariance summation we can rewrite into the sum of individual covarainces, and because $$U,\delta,\epsilon$$ are independent to each other.
+$$= cov(U,U) + cov(\epsilon_m,\epsilon_n)$$
+$$= \frac{2}{3}, if m=n$$
+$$= \frac{1}{12}, if m \neq n$$
+
+
+Because $\mu_X(n) = 0.5, and  \sum X(m,n) = \frac{4}{3} $ for all m,n
+Xi is by definition weakly stationary.
+
+## (b)
+Write the autocorrelation function of Xm,Xn
+$\frac{\sum(X_m,X_n)}{\sqrt{var(X_m)var(X_n)}}  $ for all m,n, the numerator waves between $\frac{2}{3} and \frac{1}{12}$ when $m,n \rightarrow \infty$ the autocorrelation doesn't shrink to zero.
+
+This contradicts with the ergodicity and autocorrelation shrink to zero with sufficient long lag.
+Therefore, X is non-ergodic.
+

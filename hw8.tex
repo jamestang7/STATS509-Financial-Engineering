@@ -1,0 +1,649 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={hw8},
+  pdfauthor={Siwei Tang},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{hw8}
+\author{Siwei Tang}
+\date{2022-03-29}
+
+\begin{document}
+\maketitle
+
+\hypertarget{q1}{%
+\section{Q1}\label{q1}}
+
+\hypertarget{a}{%
+\subsection{a}\label{a}}
+
+\[\hat{Y}=\begin{cases}
+0 & \text{ if } x= 0\\
+1 & \text{ if } x= 1\\
+1 & \text{ if } x= 2
+\end{cases}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*} \DecValTok{1}\SpecialCharTok{/}\DecValTok{6} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{2{-}1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{*}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+MSPE \(=\mathbb{E}((Y-\hat{Y})^2) = 2\)
+
+\hypertarget{b}{%
+\subsection{b}\label{b}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muy }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%*\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{mux }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%*\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{varx }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{) }\SpecialCharTok{\%*\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{) }\SpecialCharTok{{-}}\NormalTok{ mux}\SpecialCharTok{\^{}}\DecValTok{2}
+\CommentTok{\# when y \textgreater{}= 0}
+\NormalTok{covxy }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*{-}}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{) }\SpecialCharTok{\%*\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{) }\SpecialCharTok{{-}}\NormalTok{ muy }\SpecialCharTok{*}\NormalTok{ mux}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"mux is:"}\NormalTok{,mux,}\StringTok{";muy:"}\NormalTok{,muy,}\StringTok{"cov(x,y):"}\NormalTok{,covxy,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## mux is: 1.5 ;muy: 0.8333333 cov(x,y): 0.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Y hat is "}\NormalTok{ ,muy }\SpecialCharTok{+}\NormalTok{ (covxy }\SpecialCharTok{*}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{mux)}\SpecialCharTok{/}\NormalTok{varx), }\StringTok{"+"}\NormalTok{,covxy}\SpecialCharTok{/}\NormalTok{varx,}\StringTok{"X"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Y hat is  0.1904762 + 0.4285714 X
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{yhat2 }\OtherTok{=} \FunctionTok{as.vector}\NormalTok{(muy }\SpecialCharTok{+}\NormalTok{ (covxy }\SpecialCharTok{*}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{mux)}\SpecialCharTok{/}\NormalTok{varx) }\SpecialCharTok{+}\NormalTok{ covxy}\SpecialCharTok{/}\NormalTok{varx}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in covxy/varx * c(0, 1, 2): Recycling array of length 1 in array-vector arithmetic is deprecated.
+##   Use c() or as.vector() instead.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in muy + (covxy * (-mux)/varx) + covxy/varx * c(0, 1, 2): Recycling array of length 1 in array-vector arithmetic is deprecated.
+##   Use c() or as.vector() instead.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{yhat2 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1904762 0.6190476 1.0476190
+\end{verbatim}
+
+\(\hat{Y} = \mu_Y Y+\Sigma(Y,X)\Sigma(X)^{-1}(X-\mu_X)\)\textbackslash{}
+\(\hat{Y} = 0.1904762 + 0.4285714 X\) \[\hat{Y}=\begin{cases}
+0.1904762  & \text{ if } x= 0\\
+0.6190476 & \text{ if } x= 1\\
+1.0476190 & \text{ if } x= 2
+\end{cases}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# calculating MSPE}
+\NormalTok{mspe }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\FloatTok{0.1904762}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, (}\DecValTok{1}\SpecialCharTok{{-}} \FloatTok{0.6190476}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, (}\DecValTok{2} \SpecialCharTok{{-}} \FloatTok{1.0476190}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{,}
+\NormalTok{         (}\SpecialCharTok{{-}}\DecValTok{2} \SpecialCharTok{{-}} \FloatTok{1.0476190}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%*\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,}\DecValTok{1}\SpecialCharTok{/}\DecValTok{6}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"MSPE:"}\NormalTok{,mspe)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## MSPE: 2.031746
+\end{verbatim}
+
+\hypertarget{c}{%
+\subsection{c}\label{c}}
+
+Because the MSPE is optimal when \(\mu_x = \mu_y = 0\). We didn't center
+R.V. X and Y.
+
+\hypertarget{q2}{%
+\section{Q2}\label{q2}}
+
+\hypertarget{a-1}{%
+\subsection{a}\label{a-1}}
+
+\(\gamma(k) = cov(Y_t,Y_{t-k}) = cov(\phi_1(Y_{t-1}-\mu)+\phi_2(Y_{t-2}-\mu)+\epsilon_t,Y_{t-k})\\\)
+\(= cov(\phi_1Y_{t-1},Y_{t-k})+cov(\phi_2Y_{t-2},Y_{t-k}) + 0\\\)
+\(= \phi_1\gamma(k-1) + \phi_2\gamma(k-2)\\\)
+
+Divide \(\gamma(0)\) on both left side and right side, gives us
+
+\(\rho(k) = \phi_1\rho(k-1) + \phi_2\rho(k-2)\\ \square\)
+
+\hypertarget{b-1}{%
+\subsection{b}\label{b-1}}
+
+Because \(\rho(0) = 1\) for time series sequence \(Y_t, \forall t\)
+Applying the result when k =1 and 2 gives us
+\(\rho(1) = \rho(0)\phi_1 +\rho(1)\phi_2\)
+\(\rho(2) = \rho(1)\phi_1 +\rho(0)\phi_2\) Therefore (\(\phi_1,\phi_2\))
+solves this linear system. \(\square\) \#\# c
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rho }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(.}\DecValTok{3}\NormalTok{,.}\DecValTok{2}\NormalTok{),}\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =}\DecValTok{1}\NormalTok{)}
+\NormalTok{sqr\_mtx }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,.}\DecValTok{3}\NormalTok{,.}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{res }\OtherTok{=} \FunctionTok{solve}\NormalTok{(sqr\_mtx) }\SpecialCharTok{\%*\%}\NormalTok{ rho}
+\FunctionTok{print}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           [,1]
+## [1,] 0.2637363
+## [2,] 0.1208791
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phi1 }\OtherTok{=}\NormalTok{ res[}\DecValTok{1}\NormalTok{]}
+\NormalTok{phi2 }\OtherTok{=}\NormalTok{ res[}\DecValTok{2}\NormalTok{]}
+\NormalTok{phi3 }\OtherTok{=} \FunctionTok{c}\NormalTok{(.}\DecValTok{2}\NormalTok{,.}\DecValTok{3}\NormalTok{) }\SpecialCharTok{\%*\%}\NormalTok{ res}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Phi1 is"}\NormalTok{,phi1,}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Phi2 is"}\NormalTok{,phi2,}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Phi1 is 0.2637363 
+## Phi2 is 0.1208791
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Phi3 is"}\NormalTok{,phi3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Phi3 is 0.08901099
+\end{verbatim}
+
+\hypertarget{q3}{%
+\section{Q3}\label{q3}}
+
+\hypertarget{section}{%
+\subsection{1}\label{section}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(forecast)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'quantmod':
+##   method            from
+##   as.zoo.data.frame zoo
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(FitAR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: leaps
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ltsa
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: bestglm
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'FitAR'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:forecast':
+## 
+##     BoxCox
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{root }\OtherTok{=} \StringTok{\textquotesingle{}./datasets/\textquotesingle{}}
+\NormalTok{file }\OtherTok{=} \FunctionTok{paste}\NormalTok{(root,}\StringTok{\textquotesingle{}RUT\_03\_2015{-}03\_2019.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{sep =}\StringTok{""}\NormalTok{)}
+\NormalTok{df }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(file)}
+\NormalTok{n }\OtherTok{=} \FunctionTok{dim}\NormalTok{(df)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{r }\OtherTok{=}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Adj.Close[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{df}\SpecialCharTok{$}\NormalTok{Adj.Close[}\SpecialCharTok{{-}}\NormalTok{n] }\SpecialCharTok{{-}} \DecValTok{1}
+\FunctionTok{acf}\NormalTok{(}\FunctionTok{as.vector}\NormalTok{(r), }\AttributeTok{lag =}\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# box{-}Ljng test}
+\FunctionTok{Box.test}\NormalTok{(r, }\AttributeTok{lag =} \DecValTok{10}\NormalTok{, }\AttributeTok{type =} \StringTok{"Ljung{-}Box"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box-Ljung test
+## 
+## data:  r
+## X-squared = 11.605, df = 10, p-value = 0.3124
+\end{verbatim}
+
+The p-value of Box-Ljung test is 0.3124, which indicates that we cannot
+reject the null hypothesis. So we have accept the null that the auto
+correlation are all zeros out to lag 10. From the ACF plot, we dont see
+any big violations of autocorrelation within the 95\% confidence
+interval till lag = 20. This shows that there is no strong
+auto-correlation on the sequence. \#\# b
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RUT\_ar }\OtherTok{=} \FunctionTok{ar}\NormalTok{(r, }\AttributeTok{aic=} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{order.max =} \DecValTok{6}\NormalTok{, }\AttributeTok{method =} \StringTok{"mle"}\NormalTok{)}
+\NormalTok{RUT\_ar}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## ar(x = r, aic = TRUE, order.max = 6, method = "mle")
+## 
+## Coefficients:
+##       1        2        3        4  
+##  0.0144  -0.0050  -0.1422   0.1489  
+## 
+## Order selected 4  sigma^2 estimated as  0.0005315
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# fit the model with ARIMA}
+\NormalTok{RUT\_arima }\OtherTok{=} \FunctionTok{arima}\NormalTok{(r, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{),}
+                  \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
+\NormalTok{temp\_df }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X =}\NormalTok{ RUT\_arima}\SpecialCharTok{$}\NormalTok{residuals)}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(temp\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ X))}
+\NormalTok{p }\SpecialCharTok{+} \FunctionTok{stat\_qq}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{stat\_qq\_line}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"QQ plot of reisiduals"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Theoretical quantile"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Sample quantile"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Don't know how to automatically pick scale for object of type ts. Defaulting to continuous.
+## Don't know how to automatically pick scale for object of type ts. Defaulting to continuous.
+\end{verbatim}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Box\_Ljung test}
+\FunctionTok{Box.test}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(RUT\_arima), }\AttributeTok{lag =} \DecValTok{10}\NormalTok{, }\AttributeTok{type =} \StringTok{"Ljung{-}Box"}\NormalTok{, }\AttributeTok{fitdf =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box-Ljung test
+## 
+## data:  residuals(RUT_arima)
+## X-squared = 2.8779, df = 6, p-value = 0.824
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(}\FunctionTok{as.vector}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(RUT\_arima)), }\AttributeTok{lag =}\DecValTok{10}\NormalTok{, }\AttributeTok{main =} \StringTok{"ACF of Residuals"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-6-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{LBQPlot}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(RUT\_arima))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-6-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{checkresiduals}\NormalTok{(RUT\_arima)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-6-4.pdf}
+
+\begin{verbatim}
+## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(4,0,0) with non-zero mean
+## Q* = 2.8779, df = 5, p-value = 0.7188
+## 
+## Model df: 5.   Total lags used: 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# auto.arima(r, max.p = 20,max.q = 0,d=0 ,ic = "aic")}
+\end{Highlighting}
+\end{Shaded}
+
+The AR model picks the order \texttt{p\ =\ 4}. Numerical test of
+Box-Ljung indicates that with order p = 4, lag = 10 , there is no
+auto-correlation in the residuals. Graphic plot on Box-Ljung test shows
+that all p-values are above the 95\% interval, which means there is no
+correlation left in the model.The QQ plot on the residuals shows a bad
+approximation on its normality, as most of the points locate along the
+line. But its worth noticing that the residuals are heavy tailed, which
+means it has more density on its tails.
+
+\hypertarget{c-1}{%
+\subsection{c}\label{c-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tseries)}
+\NormalTok{f }\OtherTok{=} \FunctionTok{forecast}\NormalTok{(RUT\_arima, }\AttributeTok{h =}\DecValTok{12}\NormalTok{)}
+\NormalTok{n }\OtherTok{=} \FunctionTok{dim}\NormalTok{(df)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{new\_date }\OtherTok{=} \FunctionTok{seq.Date}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Date)[n], }\AttributeTok{length =} \DecValTok{12}\NormalTok{, }\AttributeTok{by =} \StringTok{"week"}\NormalTok{)}
+\NormalTok{upper }\OtherTok{=}\NormalTok{ f}\SpecialCharTok{$}\NormalTok{upper[}\DecValTok{13}\SpecialCharTok{:}\DecValTok{24}\NormalTok{]}
+\NormalTok{lower }\OtherTok{=}\NormalTok{ f}\SpecialCharTok{$}\NormalTok{lower[}\DecValTok{13}\SpecialCharTok{:}\DecValTok{24}\NormalTok{]}
+\NormalTok{temp }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Date =}\NormalTok{ new\_date, }\AttributeTok{lower =}\NormalTok{ lower, }\AttributeTok{upper =}\NormalTok{ upper, }\AttributeTok{y =}\NormalTok{ f}\SpecialCharTok{$}\NormalTok{mean)}
+\NormalTok{new\_date }\OtherTok{=} \FunctionTok{append}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Date,}\FunctionTok{as.character}\NormalTok{(new\_date))[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\NormalTok{new\_return }\OtherTok{=} \FunctionTok{c}\NormalTok{(r, f}\SpecialCharTok{$}\NormalTok{mean)}
+\NormalTok{new\_df }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Date =}\NormalTok{ new\_date, }\AttributeTok{y =}\NormalTok{ new\_return)}
+\NormalTok{p }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(new\_df) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(Date), y),}
+            \AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+            \AttributeTok{size  =} \FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ temp,}
+                          \FunctionTok{aes}\NormalTok{(Date, y),}
+                          \AttributeTok{color =} \StringTok{"red"}\NormalTok{,}
+                          \AttributeTok{size  =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_ribbon}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{as.Date}\NormalTok{(Date), }\AttributeTok{ymin =} \FunctionTok{c}\NormalTok{(r,lower), }
+                  \AttributeTok{ymax =} \FunctionTok{c}\NormalTok{(r, upper)),}
+              \AttributeTok{fill =} \StringTok{"grey70"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"AR p = 4 Prediction on Return"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Date"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Return"}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(temp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Date       lower      upper             y
+## 1  2019-03-25 -0.05296470 0.03740474 -7.779978e-03
+## 2  2019-04-01 -0.03668235 0.05369651  8.507080e-03
+## 3  2019-04-08 -0.04991637 0.04046352 -4.726424e-03
+## 4  2019-04-15 -0.04181967 0.04947072  3.825525e-03
+## 5  2019-04-22 -0.04718444 0.04503965 -1.072395e-03
+## 6  2019-04-29 -0.04299131 0.04923419  3.121442e-03
+## 7  2019-05-06 -0.04610103 0.04614025  1.960837e-05
+## 8  2019-05-13 -0.04423487 0.04808279  1.923958e-03
+## 9  2019-05-20 -0.04552656 0.04680893  6.411867e-04
+## 10 2019-05-27 -0.04448900 0.04784657  1.678784e-03
+## 11 2019-06-03 -0.04520198 0.04713686  9.674387e-04
+## 12 2019-06-10 -0.04475318 0.04758917  1.417997e-03
+\end{verbatim}
+
+\hypertarget{c-2}{%
+\subsection{c}\label{c-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{arma}\NormalTok{(r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## arma(x = r)
+## 
+## Coefficient(s):
+##       ar1        ma1  intercept  
+## -0.821579   0.760840   0.002586
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{arma\_fit }\OtherTok{=} \FunctionTok{arima}\NormalTok{(r, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
+\FunctionTok{checkresiduals}\NormalTok{(arma\_fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{verbatim}
+## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(1,1,0)
+## Q* = 46.243, df = 9, p-value = 5.427e-07
+## 
+## Model df: 1.   Total lags used: 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Box.test}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(arma\_fit), }\AttributeTok{lag =} \DecValTok{10}\NormalTok{, }\AttributeTok{type =} \StringTok{"Ljung{-}Box"}\NormalTok{, }\AttributeTok{fitdf =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box-Ljung test
+## 
+## data:  residuals(arma_fit)
+## X-squared = 46.243, df = 8, p-value = 2.137e-07
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{LBQPlot}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(arma\_fit))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-8-2.pdf}
+\texttt{Arma} reuslt shows that the best pick for order is
+\texttt{p\ =\ 1,\ q\ =\ 1}, and the residuals plot implies a bad fit
+because most of the points are below the 95\% interval. In addition, the
+ACF plot shows strong auto-correlation when lag is small. Residuals
+doesn't have normalty as well, it's quite right skewed. In summary, ARMA
+model is not a good fit. \#\# e
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tseries)}
+\NormalTok{f }\OtherTok{=} \FunctionTok{forecast}\NormalTok{(arma\_fit, }\AttributeTok{h =}\DecValTok{12}\NormalTok{)}
+\NormalTok{n }\OtherTok{=} \FunctionTok{dim}\NormalTok{(df)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{new\_date }\OtherTok{=} \FunctionTok{seq.Date}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Date)[n], }\AttributeTok{length =} \DecValTok{12}\NormalTok{, }\AttributeTok{by =} \StringTok{"week"}\NormalTok{)}
+\NormalTok{upper }\OtherTok{=}\NormalTok{ f}\SpecialCharTok{$}\NormalTok{upper[}\DecValTok{13}\SpecialCharTok{:}\DecValTok{24}\NormalTok{]}
+\NormalTok{lower }\OtherTok{=}\NormalTok{ f}\SpecialCharTok{$}\NormalTok{lower[}\DecValTok{13}\SpecialCharTok{:}\DecValTok{24}\NormalTok{]}
+\NormalTok{temp }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Date =}\NormalTok{ new\_date, }\AttributeTok{lower =}\NormalTok{ lower, }\AttributeTok{upper =}\NormalTok{ upper, }\AttributeTok{y =}\NormalTok{ f}\SpecialCharTok{$}\NormalTok{mean)}
+\NormalTok{new\_date }\OtherTok{=} \FunctionTok{append}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Date,}\FunctionTok{as.character}\NormalTok{(new\_date))[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\NormalTok{new\_return }\OtherTok{=} \FunctionTok{c}\NormalTok{(r, f}\SpecialCharTok{$}\NormalTok{mean)}
+\NormalTok{new\_df }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Date =}\NormalTok{ new\_date, }\AttributeTok{y =}\NormalTok{ new\_return)}
+\NormalTok{p }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(new\_df) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(Date), y),}
+            \AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+            \AttributeTok{size  =} \FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ temp,}
+                          \FunctionTok{aes}\NormalTok{(Date, y),}
+                          \AttributeTok{color =} \StringTok{"red"}\NormalTok{,}
+                          \AttributeTok{size  =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_ribbon}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{as.Date}\NormalTok{(Date), }\AttributeTok{ymin =} \FunctionTok{c}\NormalTok{(r,lower), }
+                  \AttributeTok{ymax =} \FunctionTok{c}\NormalTok{(r, upper)),}
+              \AttributeTok{fill =} \StringTok{"grey70"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"AR p = 4 Prediction on Return"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Date"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Return"}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw8_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(temp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Date       lower      upper            y
+## 1  2019-03-25 -0.06667887 0.04701678 -0.009831045
+## 2  2019-04-01 -0.06314697 0.06406681  0.000459921
+## 3  2019-04-08 -0.08124034 0.07190889 -0.004665724
+## 4  2019-04-15 -0.08656327 0.08233770 -0.002112782
+## 5  2019-04-22 -0.09645159 0.08968293 -0.003384332
+## 6  2019-04-29 -0.10303999 0.09753798 -0.002751008
+## 7  2019-05-06 -0.11039707 0.10426417 -0.003066449
+## 8  2019-05-13 -0.11670290 0.11088422 -0.002909337
+## 9  2019-05-20 -0.12296430 0.11698912 -0.002987590
+## 10 2019-05-27 -0.12877272 0.12287549 -0.002948614
+## 11 2019-06-03 -0.13439501 0.12845896 -0.002968027
+## 12 2019-06-10 -0.13975156 0.13383485 -0.002958358
+\end{verbatim}
+
+\end{document}

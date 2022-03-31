@@ -1,0 +1,349 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{STATS509 HW1}
+\author{}
+\date{\vspace{-2.5em}}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={STATS509 HW1},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{q1}{%
+\section{Q1}\label{q1}}
+
+\hypertarget{a}{%
+\subsection{a)}\label{a}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{\textquotesingle{}startup.R\textquotesingle{}}\NormalTok{)}
+\FunctionTok{qdexp}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FunctionTok{sqrt}\NormalTok{(}\FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{{-}} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -4.276089
+\end{verbatim}
+
+Quantile is -4.27
+
+\hypertarget{b}{%
+\subsection{b)}\label{b}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# when x\textless{} 2, Z is increasing }
+\DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FunctionTok{qdexp}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FunctionTok{sqrt}\NormalTok{(}\FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{)}\SpecialCharTok{**}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.05468983
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# when x \textgreater{} 2, Z is decreasing}
+\DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FunctionTok{qdexp}\NormalTok{(}\FloatTok{0.9}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FunctionTok{sqrt}\NormalTok{(}\FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{)}\SpecialCharTok{**}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13.11904
+\end{verbatim}
+
+when x \textless{} 2 quantile is 0.05, and when x\textgreater2 quantile
+is 13.12
+
+\# Q2 \#\# a)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# because log {-}return is a increrasing function}
+\NormalTok{p }\OtherTok{=} \FloatTok{0.002}
+\NormalTok{r }\OtherTok{=} \FunctionTok{qnorm}\NormalTok{(p, }\DecValTok{0}\NormalTok{, }\AttributeTok{sd =} \FloatTok{0.025}\NormalTok{)}
+\NormalTok{R }\OtherTok{=} \FunctionTok{exp}\NormalTok{(r) }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{Total }\OtherTok{=}\NormalTok{ R }\SpecialCharTok{*} \DecValTok{100}
+\FunctionTok{print}\NormalTok{(Total)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -6.942634
+\end{verbatim}
+
+Total return is -6.942634 million USD. \#\# b)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"fGarch"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: timeDate
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: timeSeries
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: fBasics
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{q1 }\OtherTok{=} \FunctionTok{qged}\NormalTok{(p, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{ , }\AttributeTok{sd =}  \FloatTok{0.025}\NormalTok{, }\AttributeTok{nu =} \FloatTok{0.5}\NormalTok{)}
+\NormalTok{q2 }\OtherTok{=} \FunctionTok{qged}\NormalTok{(p, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{ , }\AttributeTok{sd =}  \FloatTok{0.025}\NormalTok{, }\AttributeTok{nu =} \FloatTok{0.9}\NormalTok{)}
+\NormalTok{q3 }\OtherTok{=} \FunctionTok{qged}\NormalTok{(p, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{ , }\AttributeTok{sd =}  \FloatTok{0.025}\NormalTok{, }\AttributeTok{nu =} \FloatTok{1.4}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(q1, q2, q3))\{}
+\NormalTok{  R }\OtherTok{=} \FunctionTok{exp}\NormalTok{(i) }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{  total }\OtherTok{=}\NormalTok{ R }\SpecialCharTok{*}  \DecValTok{100}
+  \FunctionTok{print}\NormalTok{(total)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -12.60278
+## [1] -9.758018
+## [1] -8.011714
+\end{verbatim}
+
+The Total return is -12.6, -9.75, -8.01 respectively for \nu = 0.5, 0.9
+, 1.4 \# Q3 \#\# a
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Nasdaq\_daily\_Jan1\_2019{-}Dec31\_2021.csv"}\NormalTok{)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\NormalTok{n }\OtherTok{=} \FunctionTok{length}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Adj.Close)}
+\NormalTok{R }\OtherTok{=}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Adj.Close[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{df}\SpecialCharTok{$}\NormalTok{Adj.Close[}\SpecialCharTok{{-}}\NormalTok{n]  }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{r  }\OtherTok{=} \FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Adj.Close))}
+\NormalTok{t }\OtherTok{=} \FunctionTok{as.Date}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Date, }\AttributeTok{format =} \StringTok{"\%Y{-}\%m{-}\%d"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(t, df}\SpecialCharTok{$}\NormalTok{Adj.Close, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Price($)"}\NormalTok{, }\AttributeTok{col =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =}\NormalTok{ T)}
+\FunctionTok{plot}\NormalTok{(t[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], r, }\AttributeTok{type =}\StringTok{"l"}\NormalTok{, }\AttributeTok{axes=}\NormalTok{F, }\AttributeTok{xlab=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{ylab=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{cex=}\FloatTok{1.2}\NormalTok{, }\AttributeTok{col =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{axis}\NormalTok{(}\AttributeTok{side =} \DecValTok{4}\NormalTok{)}
+\FunctionTok{mtext}\NormalTok{(}\AttributeTok{side =} \DecValTok{4}\NormalTok{, }\AttributeTok{line =} \DecValTok{3}\NormalTok{, }\StringTok{\textquotesingle{}log return\textquotesingle{}}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \StringTok{"bottomright"}\NormalTok{,          }\CommentTok{\# Position}
+       \AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Adjusted Closed Price"}\NormalTok{, }\StringTok{"Log return"}\NormalTok{),  }\CommentTok{\# Legend texts}
+       \AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),           }\CommentTok{\# Line types}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),           }\CommentTok{\# Line colors}
+       \AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw1_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+The graph shows that when there is a huge sludge or voilitility in the
+adjusted closed price, the log-return of that period tends to flucuate
+accordingly. Otherwise, the log-return bounces up and down around zero.
+
+\#\# b
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fBasics)}
+\FunctionTok{library}\NormalTok{(psych)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'psych'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:fBasics':
+## 
+##     tr
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:timeSeries':
+## 
+##     outlier
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{describe}\NormalTok{(r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    vars   n mean   sd median trimmed  mad   min  max range  skew kurtosis se
+## X1    1 755    0 0.02      0       0 0.01 -0.13 0.09  0.22 -1.05    12.38  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{hist}\NormalTok{(r, }\AttributeTok{xlab =} \StringTok{"Log Returns"}\NormalTok{, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{"Log{-}return Histogram"}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.5}\NormalTok{)}
+\FunctionTok{boxplot}\NormalTok{(r,}\AttributeTok{main =} \StringTok{"Box plot of log return"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{hw1_files/figure-latex/unnamed-chunk-6-1.pdf} The
+skewness of log-return is -1.05, and kurtosis is 12.38. From the former
+statistics, we can tell the distribution is close to symmetric, while
+the latter statistics denotes huge deviation from normal tails, and
+density is concentrated across the mean 0.
+
+\#\# c
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu }\OtherTok{=} \FunctionTok{mean}\NormalTok{(r)}
+\NormalTok{std }\OtherTok{=} \FunctionTok{sd}\NormalTok{(r)}
+\FunctionTok{qdexp}\NormalTok{(}\FloatTok{0.004}\NormalTok{, mu, }\FunctionTok{sqrt}\NormalTok{(}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{std)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.05234054
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{quantile}\NormalTok{(r, }\FloatTok{0.004}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        0.4% 
+## -0.05404066
+\end{verbatim}
+
+They are fairly close, the latter one is slightly lower than the former
+one.
+
+\hypertarget{q4}{%
+\section{Q4}\label{q4}}
+
+\hypertarget{section}{%
+\subsection{10}\label{section}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{r }\OtherTok{=} \FunctionTok{log}\NormalTok{(}\DecValTok{100}\SpecialCharTok{/}\DecValTok{97}\NormalTok{)}
+\FunctionTok{pnorm}\NormalTok{(r, }\AttributeTok{mean =} \FloatTok{0.0002}\SpecialCharTok{*}\DecValTok{20}\NormalTok{, }\AttributeTok{sd =} \FunctionTok{sqrt}\NormalTok{(}\DecValTok{20}\NormalTok{)}\SpecialCharTok{*}\FloatTok{0.03}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5781705
+\end{verbatim}
+
+The probability is 57.8\%.
+
+\hypertarget{section-1}{%
+\subsection{11}\label{section-1}}
+
+solve P(S\textgreater(ln2 -\mu)/(t*\sigma))\textgreater0.9
+t\textgreater81583.05 t = 81584
+
+\end{document}
